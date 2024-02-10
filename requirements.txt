@@ -1,0 +1,6 @@
+streamlit==1.31.0
+torch==2.2.0
+torchvision==0.10.0
+numpy==1.21.2
+tensorflow==2.11
+matplotlib==3.4.3
