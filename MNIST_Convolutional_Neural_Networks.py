@@ -8,9 +8,9 @@ from torch import nn, optim
 from tensorflow.keras.datasets import mnist
 
 # PyTorch CNN model
-class CustomCNN(nn.Module):
+class CustomCNN_PT(nn.Module):
     def __init__(self, num_conv_layers, in_channels, out_channels, kernel_size, stride, padding):
-        super(CustomCNN, self).__init__()
+        super(CustomCNN_PT, self).__init__()
 
         self.conv_layers = nn.ModuleList()
         self.num_conv_layers = num_conv_layers
@@ -57,9 +57,9 @@ class CustomCNN(nn.Module):
         self.final_size = x.size(1)
 
 # TensorFlow CNN model
-class CustomCNN(tf.keras.Model):
+class CustomCNN_TF(tf.keras.Model):
     def __init__(self, num_conv_layers, filters, kernel_size, strides, padding):
-        super(CustomCNN, self).__init__()
+        super(CustomCNN_TF, self).__init__()
 
         self.conv_layers = tf.keras.Sequential()
         for _ in range(num_conv_layers):
@@ -140,7 +140,7 @@ def main():
 
         # Define the model, optimizer, and criterion
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        model = CustomCNN(num_conv_layers, 1, out_channel, kernel_size, strides, padding).to(device)
+        model = CustomCNN_PT(num_conv_layers, 1, out_channel, kernel_size, strides, padding).to(device)
         optimizer = optim.Adam(model.parameters(), lr=0.01)
         criterion = nn.CrossEntropyLoss()
 
@@ -179,7 +179,7 @@ def main():
         test_labels = tf.keras.utils.to_categorical(test_labels)
 
         # Define the model
-        model = CustomCNN(num_conv_layers, filters, kernel_size, strides, padding)
+        model = CustomCNN_TF(num_conv_layers, filters, kernel_size, strides, padding)
 
         # Training the model
         epochs = 5
